@@ -11,7 +11,7 @@
     <!-- Thông tin dự án -->
     <groupId>io.akitect</groupId>
     <artifactId>devtoolkit</artifactId>
-    <version>1.0.0</version>
+    <version>${revision}</version>
     <packaging>jar</packaging>
     <name>devtoolkit</name>
     <description>devtoolkit</description>
