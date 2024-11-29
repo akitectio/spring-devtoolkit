@@ -17,6 +17,14 @@
     <description>devtoolkit</description>
     <url>https://github.com/akitectio/spring-devtoolkit</url>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/akitectio/spring-devtoolkit</url>
+        </repository>
+    </distributionManagement>
+
     <properties>
         <java.version>23</java.version>
         <spring.boot.version>3.1.0</spring.boot.version>
