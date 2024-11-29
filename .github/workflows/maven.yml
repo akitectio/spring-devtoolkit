@@ -3,7 +3,7 @@ name: Build and Release
 on:
   push:
     tags:
-      - "v*"
+      - "v*" # Trigger khi có tag bắt đầu với "v"
 
 jobs:
   build:
@@ -21,9 +21,16 @@ jobs:
           java-version: "23"
           distribution: "temurin"
 
-      # Build JAR
+      # Lấy phiên bản từ tag
+      - name: Extract version from tag
+        run: |
+          echo "VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
+        shell: bash
+
+      # Build JAR với phiên bản
       - name: Build with Maven
-        run: mvn clean package
+        run: |
+          mvn clean package -Drevision=${{ env.VERSION }}
 
       # Upload JAR to Release
       - name: Upload JAR to Release
@@ -31,4 +38,8 @@ jobs:
         with:
           artifacts: target/*.jar
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref_name }}
+          tag: ${{ env.VERSION }}
+          name: Release ${{ env.VERSION }}
+          body: |
+            Automated release for version ${{ env.VERSION }}.
+            Built using GitHub Actions.
